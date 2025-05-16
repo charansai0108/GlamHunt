@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Glam Hunt - Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(40, 40, 40, 0.8)),
+      url('https://images.unsplash.com/photo-1612152062854-d6b40bb0c9c5?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+  }
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  p.launch-date {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  /* Digital Timer style */
+  .countdown {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .time-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    min-width: 70px;
+    font-weight: 700;
+    font-size: 3rem;
+    font-variant-numeric: tabular-nums;
+    color: #00ffae;
+    user-select: none;
+  }
+  .label {
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: #aaa;
+    font-weight: 600;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 0.75rem;
+  }
+  input[type="email"] {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  button {
+    padding: 0.75rem 1rem;
+    background-color: #ffffff;
+    color: #000;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background-color: #eaeaea;
+  }
+  .socials {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+    opacity: 0.9;
+  }
+  .socials a {
+    color: white;
+    transition: color 0.3s ease;
+  }
+  .socials a:hover {
+    color: #00ffae;
+  }
+  .thank-you {
+    margin-top: 1rem;
+    color: #00ff8c;
+    font-weight: 500;
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 2.2rem;
+    }
+    p.launch-date {
+      font-size: 1rem;
+    }
+    .time-box {
+      min-width: 50px;
+      font-size: 2rem;
+      padding: 0.6rem 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Glam Hunt</h1>
+    <p class="launch-date">Launching on July 13, 2025</p>
+
+    <div class="countdown" aria-label="Countdown timer">
+      <div class="time-box" id="days">00<div class="label">Days</div></div>
+      <div class="time-box" id="hours">00<div class="label">Hours</div></div>
+      <div class="time-box" id="minutes">00<div class="label">Minutes</div></div>
+      <div class="time-box" id="seconds">00<div class="label">Seconds</div></div>
+    </div>
+
+    <form id="notifyForm" action="https://formspree.io/f/mkgrybnz" method="POST">
+      <input type="email" name="email" placeholder="Enter your email" required />
+      <button type="submit">Notify Me</button>
+    </form>
+
+    <div class="thank-you" id="thankYouMessage">Thanks! You’ll be notified.</div>
+
+    <div class="socials">
+      <a href="https://www.instagram.com/glamhunt.co?igsh=OXo1OTlqZmN0dTN1&utm_source=qr" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://chat.whatsapp.com/HPNCyULfjwUBLDsb16BXTv" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    // Launch date July 13, 2025 midnight
+    const launchDate = new Date("July 13, 2025 00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        daysEl.innerHTML = "00<div class='label'>Days</div>";
+        hoursEl.innerHTML = "00<div class='label'>Hours</div>";
+        minutesEl.innerHTML = "00<div class='label'>Minutes</div>";
+        secondsEl.innerHTML = "00<div class='label'>Seconds</div>";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.innerHTML = String(days).padStart(2, "0") + "<div class='label'>Days</div>";
+      hoursEl.innerHTML = String(hours).padStart(2, "0") + "<div class='label'>Hours</div>";
+      minutesEl.innerHTML = String(minutes).padStart(2, "0") + "<div class='label'>Minutes</div>";
+      secondsEl.innerHTML = String(seconds).padStart(2, "0") + "<div class='label'>Seconds</div>";
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+
+    // Form submit handler
+    const form = document.getElementById("notifyForm");
+    const thankYou = document.getElementById("thankYouMessage");
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: { Accept: "application/json" },
+        });
+        if (response.ok) {
+          form.reset();
+          thankYou.style.display = "block";
+        } else {
+          alert("Something went wrong. Try again.");
+        }
+      } catch (error) {
+        alert("Error submitting the form.");
+      }
+    });
+  </script>
+</body>
+</html>
